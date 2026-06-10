@@ -12,28 +12,35 @@ jobs:
     name: Type Check
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v4
-     - uses: ./.github/actions/setup-node
-     - uses: ./.github/actions/pnpm-install
-     - name: check types
-       run: pnpm run tsc
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+        with:
+          node-version: 20
+      - name: install dependecies
+        run: npm install --legacy-peer-deps
+      - name: check types
+        run: pnpm run tsc
   linting:
     name: lint
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v4
-     - uses: ./.github/actions/setup-node
-     - uses: ./.github/actions/pnpm-install
-     - name: check linting rules
-       run: pnpm run lint
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+        with:
+          node-version: 20
+      - name: install dependecies
+        run: npm install --legacy-peer-deps
+
+      - name: check linting rules
+        run: pnpm run lint
   unit-test:
     name: test
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v4
-     - uses: ./.github/actions/setup-node
-     - uses: ./.github/actions/pnpm-install
-     - name: check linting rules
-       run: pnpm run test-backend
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/pnpm-install
+      - name: check linting rules
+        run: pnpm run test-backend
 
 
